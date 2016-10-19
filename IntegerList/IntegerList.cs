@@ -127,7 +127,7 @@ namespace IntegerList
         /// This method returns index(location) of a searched item in private field.
         /// </summary>
         /// <param name="item">Item to be searched in private field.</param>
-        /// <returns>Index of searched element or -1</returns>
+        /// <returns>Index of searched element or -1 if item is not found.</returns>
         public int IndexOf(int item)
         {
             return Array.IndexOf(_internalStorage, item);
