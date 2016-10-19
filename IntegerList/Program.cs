@@ -11,11 +11,11 @@ namespace IntegerList
         static void Main(string[] args)
         {
             IntegerList integerList = new IntegerList();
-
+            ListExample(integerList);
 
         }
 
-        public void ListExample(IIntegerList listOfIntegers)
+        public static void ListExample(IIntegerList listOfIntegers)
         {
             listOfIntegers.Add(1); // [1]
             listOfIntegers.Add(2); // [1,2]

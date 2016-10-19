@@ -133,6 +133,11 @@ namespace IntegerList
             return Array.IndexOf(_internalStorage, item);
         }
 
+        /// <summary>
+        /// This method removes an item from list using number to be removed as paramter.
+        /// </summary>
+        /// <param name="item">Number that needs to be deleted.</param>
+        /// <returns>Returns false if number is not found inside private field.</returns>
         public bool Remove(int item)
         {
             int indexOfRemoval = this.IndexOf(item);
@@ -143,6 +148,11 @@ namespace IntegerList
             return RemoveAt(indexOfRemoval);
         }
 
+        /// <summary>
+        /// This method removes an item from list using index(place) where the number is niside private field.
+        /// </summary>
+        /// <param name="index">Place where the number will be removed.</param>
+        /// <returns>Returns false if number could not be removed due to invalid index given.</returns>
         public bool RemoveAt(int index)
         {
             if (index >= this.Count || index < 0)
