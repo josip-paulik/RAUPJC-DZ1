@@ -8,6 +8,32 @@ namespace IntegerList
 {
     class IntegerList : IIntegerList
     {
+        private int[] _internalStorage;
+
+        /// <summary>
+        /// This constructor creates new IntegerList by initaliazing its private field with size 4.
+        /// </summary>
+        public IntegerList()
+        {
+            _internalStorage = new int[4];
+        }
+
+        /// <summary>
+        /// This constructor creates new IntegerList by initaliazing its private field with size given by initialSize.
+        /// </summary>
+        /// <param name="initalSize">How much size private field will take.</param>
+        public IntegerList(int initalSize)
+        {
+            if(initalSize < 0)
+            {
+                throw new ArgumentException("Argument musn't be negative.");
+            }
+            else
+            {
+                _internalStorage = new int[initalSize];
+            }
+        }
+
         public int Count
         {
             get
