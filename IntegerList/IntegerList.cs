@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace IntegerList
 {
+    /// <summary>
+    /// This is my implementation of IntegerList.
+    /// </summary>
     class IntegerList : IIntegerList
     {
         private int[] _internalStorage;
+
+        //This index enables fast adding into array and also points to an index after last item.
+        private int _internalStorageIndex = 0; 
+
 
         /// <summary>
         /// This constructor creates new IntegerList by initaliazing its private field with size 4.
@@ -21,7 +28,8 @@ namespace IntegerList
         /// <summary>
         /// This constructor creates new IntegerList by initaliazing its private field with size given by initialSize.
         /// </summary>
-        /// <param name="initalSize">How much size private field will take.</param>
+        /// <exception cref="ArgumentException">Thrown if given parameter is negative</exception>
+        /// <param name="initalSize">How much size private field will take. Must not be negative.</param>
         public IntegerList(int initalSize)
         {
             if(initalSize < 0)
@@ -34,47 +42,120 @@ namespace IntegerList
             }
         }
 
+        /// <summary>
+        /// This method returns number of items in the private field.
+        /// </summary>
         public int Count
         {
             get
             {
-                throw new NotImplementedException();
+                return _internalStorageIndex;
             }
         }
 
+        /// <summary>
+        /// This method adds item in private field onto its last place. Also manages capacity.
+        /// It manages it by doubling up its size when array is out of space.
+        /// </summary>
+        /// <param name="item">Item which we want to store.</param>
         public void Add(int item)
         {
-            throw new NotImplementedException();
+            if(_internalStorageIndex >= _internalStorage.Length - 1)
+            {
+                Array.Resize(ref _internalStorage, _internalStorage.Length * 2);
+            }
+
+            _internalStorage[_internalStorageIndex] = item;
+            _internalStorageIndex++;
         }
 
+        /// <summary>
+        /// This method clears whole private field
+        /// </summary>
         public void Clear()
         {
-            throw new NotImplementedException();
+            Array.Clear(_internalStorage, 0, this.Count);
+            _internalStorageIndex = 0;
+
         }
 
+        /// <summary>
+        /// Searches for an element inside private field and returns the result of a search.
+        /// </summary>
+        /// <param name="item">What to search for.</param>
+        /// <returns>Result of a search - true or false.</returns>
         public bool Contains(int item)
         {
-            throw new NotImplementedException();
+            bool isFound = false;
+
+            foreach (var number in _internalStorage)
+            {
+                if (item == number)
+                {
+                    isFound = true;
+                    break;
+                }
+            }
+
+            return isFound;
         }
 
+        /// <summary>
+        /// Returns specified element at searched index.
+        /// </summary>
+        /// 
+        /// <param name="index">Searched index.</param>
+        /// 
+        /// <returns>Element which is on the specified index or it throws exception</returns>
+        /// 
+        /// <exception cref="IndexOutOfRangeException">
+        /// This Exception will be thrown when index is an illegal value
+        /// </exception>
         public int GetElement(int index)
         {
-            throw new NotImplementedException();
+            if (index > 0 && index < _internalStorageIndex)
+            {
+                return _internalStorage[index]; 
+            }
+            else
+            {
+                throw new IndexOutOfRangeException("Index is out of range of this IntegerList.");
+            }
         }
 
+        /// <summary>
+        /// This method returns index(location) of a searched item in private field.
+        /// </summary>
+        /// <param name="item">Item to be searched in private field.</param>
+        /// <returns>Index of searched element or -1</returns>
         public int IndexOf(int item)
         {
-            throw new NotImplementedException();
+            return Array.IndexOf(_internalStorage, item);
         }
 
         public bool Remove(int item)
         {
-            throw new NotImplementedException();
+            int indexOfRemoval = this.IndexOf(item);
+            if(indexOfRemoval == -1)
+            {
+                return false;
+            }
+            return RemoveAt(indexOfRemoval);
         }
 
         public bool RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            if (index >= this.Count || index < 0)
+            {
+                return false;
+            }
+
+            for (int i = index; i < _internalStorageIndex - 1; i++)
+            {
+                _internalStorage[i] = _internalStorage[i + 1];
+            }
+            _internalStorageIndex--;
+            return true;
         }
     }
 }
