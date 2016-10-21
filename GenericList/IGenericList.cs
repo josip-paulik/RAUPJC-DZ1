@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericList
+namespace GenericList 
 {
-    interface IGenericList<X>
+    interface IGenericList<X> : IEnumerable<X>
     {
         /// <summary>
         /// Adds an item to the collection.

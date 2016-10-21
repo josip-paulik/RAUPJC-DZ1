@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -109,15 +110,17 @@ namespace GenericList
         /// </exception>
         public X GetElement(int index)
         {
-            if (index > 0 && index < _internalStorageIndex)
+            if (index >= 0 && index < _internalStorageIndex)
             {
                 return _internalStorage[index];
             }
             else
             {
-                throw new IndexOutOfRangeException("Index is out of range of this IntegerList.");
+                throw new IndexOutOfRangeException("Index is out of range of this GenericList.");
             }
         }
+
+        
 
         /// <summary>
         /// This method returns index(location) of a searched item in private field.
@@ -177,6 +180,17 @@ namespace GenericList
             Array.Clear(_internalStorage, _internalStorageIndex, 1);
 
             return true;
+        }
+
+        // IEnumerable <X> implementation
+        public IEnumerator<X> GetEnumerator()
+        {
+            return new GenericListEnumerator<X>(this);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
