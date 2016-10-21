@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace IntegerList
 {
     /// <summary>
-    /// This is my implementation of IntegerList.
+    /// This is my implementation of IntegerList which uses an internal storage index which enables fast adding to internal storage.
     /// </summary>
     class IntegerList : IIntegerList
     {
         private int[] _internalStorage;
 
-        //This index enables fast adding into array and also points to an index after last item.
+        //This index enables fast adding into array and also points to an index after the last item.
         private int _internalStorageIndex = 0; 
 
 
@@ -86,18 +86,15 @@ namespace IntegerList
         /// <returns>Result of a search - true or false.</returns>
         public bool Contains(int item)
         {
-            bool isFound = false;
-
-            foreach (var number in _internalStorage)
+            for (int i = 0; i < _internalStorageIndex; i++)
             {
-                if (item == number)
+                if(item == _internalStorage[i])
                 {
-                    isFound = true;
-                    break;
+                    return true;
                 }
             }
 
-            return isFound;
+            return false;
         }
 
         /// <summary>
@@ -130,7 +127,15 @@ namespace IntegerList
         /// <returns>Index of searched element or -1 if item is not found.</returns>
         public int IndexOf(int item)
         {
-            return Array.IndexOf(_internalStorage, item);
+            for (int i = 0; i < _internalStorageIndex; i++)
+            {
+                if(item == _internalStorage[i])
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
         /// <summary>
