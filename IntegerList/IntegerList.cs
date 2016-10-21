@@ -169,7 +169,11 @@ namespace IntegerList
             {
                 _internalStorage[i] = _internalStorage[i + 1];
             }
+
+           
             _internalStorageIndex--;
+            Array.Clear(_internalStorage, _internalStorageIndex, 1);
+
             return true;
         }
     }

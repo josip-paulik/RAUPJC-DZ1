@@ -11,6 +11,8 @@ namespace GenericList
         private X[] _internalStorage;
 
         //This index enables fast adding into array and also points to an index after the last item.
+        //Also finds free space radically fast(it is already pointing to it).
+        //This might not be perfect implementation...
         private int _internalStorageIndex = 0;
 
 
@@ -166,7 +168,14 @@ namespace GenericList
             {
                 _internalStorage[i] = _internalStorage[i + 1];
             }
+
+            
             _internalStorageIndex--;
+
+            //This is reason why it is not perfect implementation.
+            //I now have to remove loose element after moving left all elements of array.
+            Array.Clear(_internalStorage, _internalStorageIndex, 1);
+
             return true;
         }
     }
