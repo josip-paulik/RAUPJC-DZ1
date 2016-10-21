@@ -176,7 +176,7 @@ namespace GenericList
             _internalStorageIndex--;
 
             //This is reason why it is not perfect implementation.
-            //I now have to remove loose element after moving left all elements of array.
+            //I now have to remove loose element after moving left all elements of array that are right of element which had to be removed.
             Array.Clear(_internalStorage, _internalStorageIndex, 1);
 
             return true;
