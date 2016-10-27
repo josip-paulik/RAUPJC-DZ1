@@ -32,13 +32,13 @@ namespace GenericList
         }
 
         /// <summary>
-        /// Not completely sure what this does. It does not seem like I need it...
+        /// Returns current item in Enumerator
         /// </summary>
         object IEnumerator.Current
         {
             get
             {
-                throw new NotImplementedException();
+                return genericList.GetElement(genericListIndex);
             }
         }
 
